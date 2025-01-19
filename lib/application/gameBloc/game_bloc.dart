@@ -19,5 +19,20 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<UpdateErrorMessageEvent>((event, emit) {
       emit(state.copyWith(errorMessage: event.errorMessage));
     });
+
+    on<SelectYourselfEvent>((event, emit) {
+      int numberOfPlayers = state.playerNumber;
+      if (event.selectedPlayer > numberOfPlayers - 1) {
+        emit(state.copyWith(selectedPlayer: null));
+      } else {
+        emit(state.copyWith(selectedPlayer: event.selectedPlayer));
+      }
+    });
+
+    on<ChangeGameScreenEvent>((event, emit) {
+      emit(state.copyWith(currentScreen: event.screenNumber));
+    });
   }
+
+  
 }

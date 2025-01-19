@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cluedo_neu/core/validators/validate_player_names.dart';
+import 'package:cluedo_neu/core/failures/create_game_error_messages.dart';
+import 'package:cluedo_neu/core/validators/validate_player_input.dart';
 import 'package:cluedo_neu/presentation/createGame/widgets/create_game_body.dart';
 import 'package:cluedo_neu/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -48,14 +49,21 @@ class CreateGamePage extends StatelessWidget {
             }
 
             String? errorMessage =
-                PlayerValidation().validatePlayerList(playerNames);
+                PlayerValidation().validatePlayerList(playerNames: playerNames);
+            bool yourPlayerIsSelected = PlayerValidation().yourPlayerIsSelected(
+                gameState: BlocProvider.of<GameBloc>(context).state);
 
-            if (errorMessage == null) {
+            if (errorMessage == null && yourPlayerIsSelected) {
               gameBloc.add(LockPlayersEvent(playerNames: playerNames));
               AutoRouter.of(context).replace(const GameRoute());
             } else {
+              String newErrorMessage =
+                  CreateGameErrorMessages().getErrorMessage(
+                errorMessage: errorMessage,
+                yourPlayerIsSelected: yourPlayerIsSelected,
+              );
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Center(child: Text(errorMessage)),
+                content: Center(child: Text(newErrorMessage)),
                 backgroundColor: Colors.red.shade400,
               ));
             }
