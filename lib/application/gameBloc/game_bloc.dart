@@ -1,7 +1,9 @@
-import 'package:bloc/bloc.dart';
+
+import 'package:cluedo_neu/utils/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 part 'game_event.dart';
 part 'game_state.dart';

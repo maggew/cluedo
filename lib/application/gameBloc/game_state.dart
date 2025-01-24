@@ -6,6 +6,7 @@ class GameState {
   final String? errorMessage;
   final int? selectedPlayer;
   final int currentScreen;
+  final Map<String, bool> guests;
 
   GameState({
     required this.playerNumber,
@@ -13,6 +14,7 @@ class GameState {
     required this.errorMessage,
     required this.selectedPlayer,
     required this.currentScreen,
+    required this.guests,
   });
 
   factory GameState.initial() => GameState(
@@ -21,6 +23,7 @@ class GameState {
         errorMessage: null,
         selectedPlayer: null,
         currentScreen: 0,
+        guests: { for (var name in guestNames) name : false },
       );
 
   GameState copyWith({
@@ -29,6 +32,7 @@ class GameState {
     String? errorMessage,
     int? selectedPlayer,
     int? currentScreen,
+    Map<String, bool>? guests,
   }) {
     return GameState(
       playerNumber: playerNumber ?? this.playerNumber,
@@ -36,6 +40,7 @@ class GameState {
       errorMessage: errorMessage ?? this.errorMessage,
       selectedPlayer: selectedPlayer ?? this.selectedPlayer,
       currentScreen: currentScreen ?? this.currentScreen,
+      guests: guests ?? this.guests,
     );
   }
 }
