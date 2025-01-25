@@ -1,4 +1,4 @@
-enum WeaponNames {
+enum WeaponName {
   Pistole,
   Kerzenleuchter,
   Seil,
