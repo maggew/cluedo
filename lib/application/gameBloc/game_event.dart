@@ -37,3 +37,15 @@ class ChangeGameScreenEvent extends GameEvent {
 
   const ChangeGameScreenEvent({required this.screenNumber});
 }
+
+class CheckDataEvent extends GameEvent {
+  final CategoryName categoryName;
+  final int listIndex;
+
+
+  const CheckDataEvent({
+    required this.categoryName,
+    required this.listIndex,
+ 
+  });
+}
