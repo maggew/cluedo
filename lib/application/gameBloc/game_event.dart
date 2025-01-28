@@ -38,14 +38,18 @@ class ChangeGameScreenEvent extends GameEvent {
   const ChangeGameScreenEvent({required this.screenNumber});
 }
 
-class CheckDataEvent extends GameEvent {
-  final CategoryName categoryName;
-  final int listIndex;
+class CheckRoomEvent extends GameEvent {
+  final Room room;
 
+  const CheckRoomEvent({
+    required this.room,
+  });
+}
 
-  const CheckDataEvent({
-    required this.categoryName,
-    required this.listIndex,
- 
+class CheckWeaponEvent extends GameEvent {
+  final Weapon weapon;
+
+  const CheckWeaponEvent({
+    required this.weapon,
   });
 }

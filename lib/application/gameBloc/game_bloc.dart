@@ -1,6 +1,7 @@
-import 'package:cluedo_neu/domain/enums/category_name.dart';
 import 'package:cluedo_neu/domain/enums/room_name.dart';
+import 'package:cluedo_neu/domain/enums/weapon_name.dart';
 import 'package:cluedo_neu/infrastructure/models/room.dart';
+import 'package:cluedo_neu/infrastructure/models/weapon.dart';
 import 'package:cluedo_neu/utils/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -36,21 +37,24 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       emit(state.copyWith(currentScreen: event.screenNumber));
     });
 
-    on<CheckDataEvent>((event, emit) {
-      switch (event.categoryName) {
-        case CategoryName.guest:
-          //TODO: Hier muss der Datentyp noch komplett geändert werden
-          //TODO: Das wollte ich aber nicht machen, bevor ich gesehen habe, wie du die Klasse umgesetzt hast
-          emit(state.copyWith(guests: null));
-        case CategoryName.room:
-          List<Room> roomsList = List.of(state.rooms);
-          Room oldRoom = roomsList[event.listIndex];
-          Room updatedRoom = oldRoom.copyWith(checked: oldRoom.checked);
-          roomsList[event.listIndex] = updatedRoom;
-          emit(state.copyWith(rooms: roomsList));
-        case CategoryName.weapon:
-        //TODO: dasselbe hier auch noch machen
-      }
+    on<CheckRoomEvent>((event, emit) {
+      List<Room> oldRoomsList = List.of(state.rooms);
+      int indexOfOldRoom = oldRoomsList.indexOf(event.room);
+      Room oldRoom = oldRoomsList[indexOfOldRoom];
+      Room updatedRoom = oldRoom.copyWith(checked: !oldRoom.checked);
+      List<Room> updatedRoomsList = oldRoomsList;
+      updatedRoomsList[indexOfOldRoom] = updatedRoom;
+      emit(state.copyWith(rooms: updatedRoomsList));
+    });
+
+    on<CheckWeaponEvent>((event, emit) {
+      List<Weapon> oldWeaponsList = List.of(state.weapons);
+      int indexOfOldWeapon = oldWeaponsList.indexOf(event.weapon);
+      Weapon oldWeapon = oldWeaponsList[indexOfOldWeapon];
+      Weapon updatedWeapon = oldWeapon.copyWith(checked: !oldWeapon.checked);
+      List<Weapon> updatedWeaponsList = oldWeaponsList;
+      updatedWeaponsList[indexOfOldWeapon] = updatedWeapon;
+      emit(state.copyWith(weapons: updatedWeaponsList));
     });
   }
 }

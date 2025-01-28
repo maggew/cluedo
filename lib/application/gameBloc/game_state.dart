@@ -8,6 +8,7 @@ class GameState {
   final int currentScreen;
   final Map<String, bool> guests;
   final List<Room> rooms;
+  final List<Weapon> weapons;
 
   GameState({
     required this.playerNumber,
@@ -17,23 +18,33 @@ class GameState {
     required this.currentScreen,
     required this.guests,
     required this.rooms,
+    required this.weapons,
   });
 
   factory GameState.initial() => GameState(
-      playerNumber: 2,
-      playerNames: [],
-      errorMessage: null,
-      selectedPlayer: null,
-      currentScreen: 0,
-      guests: {for (var name in guestNames) name: false},
-      rooms: [
-        for (var room in RoomName.values)
-          Room(
-            roomName: room,
-            checked: false,
-            playerWhichHoldsCard: null,
-          )
-      ]);
+        playerNumber: 2,
+        playerNames: [],
+        errorMessage: null,
+        selectedPlayer: null,
+        currentScreen: 0,
+        guests: {for (var name in guestNames) name: false},
+        rooms: [
+          for (var room in RoomName.values)
+            Room(
+              roomName: room,
+              checked: false,
+              playerWhichHoldsCard: null,
+            )
+        ],
+        weapons: [
+          for (var weapon in WeaponName.values)
+            Weapon(
+              weaponName: weapon,
+              checked: false,
+              playerWhichHoldsCard: null,
+            )
+        ],
+      );
 
   GameState copyWith({
     int? playerNumber,
@@ -43,6 +54,7 @@ class GameState {
     int? currentScreen,
     Map<String, bool>? guests,
     List<Room>? rooms,
+    List<Weapon>? weapons,
   }) {
     return GameState(
       playerNumber: playerNumber ?? this.playerNumber,
@@ -52,6 +64,7 @@ class GameState {
       currentScreen: currentScreen ?? this.currentScreen,
       guests: guests ?? this.guests,
       rooms: rooms ?? this.rooms,
+      weapons: weapons ?? this.weapons,
     );
   }
 }
