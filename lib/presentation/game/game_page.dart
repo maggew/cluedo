@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cluedo_neu/application/gameBloc/game_bloc.dart';
 import 'package:cluedo_neu/presentation/game/widgets/guest_body.dart';
-import 'package:cluedo_neu/presentation/game/widgets/location_body.dart';
+import 'package:cluedo_neu/presentation/game/widgets/room_body.dart';
 import 'package:cluedo_neu/presentation/game/widgets/overview_body.dart';
 import 'package:cluedo_neu/presentation/game/widgets/weapon_body.dart';
 import 'package:flutter/material.dart';

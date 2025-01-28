@@ -1,9 +1,11 @@
-
+import 'package:cluedo_neu/domain/enums/room_name.dart';
+import 'package:cluedo_neu/domain/enums/weapon_name.dart';
+import 'package:cluedo_neu/infrastructure/models/room.dart';
+import 'package:cluedo_neu/infrastructure/models/weapon.dart';
 import 'package:cluedo_neu/utils/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 part 'game_event.dart';
 part 'game_state.dart';
@@ -34,7 +36,25 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<ChangeGameScreenEvent>((event, emit) {
       emit(state.copyWith(currentScreen: event.screenNumber));
     });
-  }
 
-  
+    on<CheckRoomEvent>((event, emit) {
+      List<Room> oldRoomsList = List.of(state.rooms);
+      int indexOfOldRoom = oldRoomsList.indexOf(event.room);
+      Room oldRoom = oldRoomsList[indexOfOldRoom];
+      Room updatedRoom = oldRoom.copyWith(checked: !oldRoom.checked);
+      List<Room> updatedRoomsList = oldRoomsList;
+      updatedRoomsList[indexOfOldRoom] = updatedRoom;
+      emit(state.copyWith(rooms: updatedRoomsList));
+    });
+
+    on<CheckWeaponEvent>((event, emit) {
+      List<Weapon> oldWeaponsList = List.of(state.weapons);
+      int indexOfOldWeapon = oldWeaponsList.indexOf(event.weapon);
+      Weapon oldWeapon = oldWeaponsList[indexOfOldWeapon];
+      Weapon updatedWeapon = oldWeapon.copyWith(checked: !oldWeapon.checked);
+      List<Weapon> updatedWeaponsList = oldWeaponsList;
+      updatedWeaponsList[indexOfOldWeapon] = updatedWeapon;
+      emit(state.copyWith(weapons: updatedWeaponsList));
+    });
+  }
 }
