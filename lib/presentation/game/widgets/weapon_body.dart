@@ -29,16 +29,41 @@ List<Widget> weaponCheckboxWidgets(
   for (Weapon weapon in gameState.weapons) {
     roomCheckboxWidgets.add(Padding(
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-      child: CustomWeaponButton(
-        gameState: gameState,
-        weapon: weapon,
-        highlightColor: themeData.colorScheme.onPrimary,
-        callback: () {
-          BlocProvider.of<GameBloc>(context)
-              .add(CheckWeaponEvent(weapon: weapon));
-        },
+      child: Row(
+        children: [
+          Expanded(
+            child: CustomWeaponButton(
+              weapon: weapon,
+              highlightColor: themeData.colorScheme.onPrimary,
+              callback: () {
+                BlocProvider.of<GameBloc>(context)
+                    .add(CheckWeaponEvent(weapon: weapon));
+              },
+            ),
+          ),
+          Gap(10),
+          DropdownMenu<String>(
+            dropdownMenuEntries: getDropdownMenuEntries(gameState: gameState),
+            initialSelection: "",
+            onSelected: (playerName) {
+              BlocProvider.of<GameBloc>(context).add(
+                  AssignPlayerCardEvent(card: weapon.weaponName, playerName: playerName!));
+            },
+          ),
+        ],
       ),
     ));
   }
   return roomCheckboxWidgets;
+}
+
+List<DropdownMenuEntry<String>> getDropdownMenuEntries(
+    {required GameState gameState}) {
+  List<DropdownMenuEntry<String>> dropdownMenuEntries = [];
+  dropdownMenuEntries.add(DropdownMenuEntry<String>(value: "", label: ""));
+  for (String playerName in gameState.playerNames) {
+    dropdownMenuEntries
+        .add(DropdownMenuEntry<String>(value: playerName, label: playerName));
+  }
+  return dropdownMenuEntries;
 }

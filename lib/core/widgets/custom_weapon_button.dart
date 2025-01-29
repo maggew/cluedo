@@ -1,17 +1,16 @@
-import 'package:cluedo_neu/application/gameBloc/game_bloc.dart';
 import 'package:cluedo_neu/infrastructure/models/weapon.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CustomWeaponButton extends StatelessWidget {
   final Weapon weapon;
   final Function callback;
   final Color? highlightColor;
-  final GameState gameState;
   const CustomWeaponButton({
     super.key,
     required this.weapon,
     required this.callback,
-    required this.gameState,
     this.highlightColor,
   });
 
@@ -32,9 +31,20 @@ class CustomWeaponButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(weapon.weaponName.name, style: themeData.textTheme.labelLarge),
+            Row(
+              children: [
+                Gap(10),
+                weapon.icon,
+                Gap(10),
+                Text(weapon.weaponName.name,
+                    style: themeData.textTheme.labelLarge),
+              ],
+            ),
             if (weapon.checked) ...[
-              Icon(Icons.check),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Icon(MdiIcons.alphaX),
+              ),
             ],
           ],
         ),

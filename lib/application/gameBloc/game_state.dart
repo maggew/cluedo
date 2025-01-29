@@ -9,6 +9,7 @@ class GameState {
   final Map<String, bool> guests;
   final List<Room> rooms;
   final List<Weapon> weapons;
+  final Map<String, List<String>>? mapOfPlayersAndCards;
 
   GameState({
     required this.playerNumber,
@@ -19,6 +20,7 @@ class GameState {
     required this.guests,
     required this.rooms,
     required this.weapons,
+    required this.mapOfPlayersAndCards,
   });
 
   factory GameState.initial() => GameState(
@@ -41,9 +43,11 @@ class GameState {
             Weapon(
               weaponName: weapon,
               checked: false,
+              icon: mapWeaponIcon(weapon: weapon),
               playerWhichHoldsCard: null,
             )
         ],
+        mapOfPlayersAndCards: null,
       );
 
   GameState copyWith({
@@ -55,6 +59,7 @@ class GameState {
     Map<String, bool>? guests,
     List<Room>? rooms,
     List<Weapon>? weapons,
+    Map<String, List<String>>? mapOfPlayersAndCards,
   }) {
     return GameState(
       playerNumber: playerNumber ?? this.playerNumber,
@@ -65,6 +70,7 @@ class GameState {
       guests: guests ?? this.guests,
       rooms: rooms ?? this.rooms,
       weapons: weapons ?? this.weapons,
+      mapOfPlayersAndCards: mapOfPlayersAndCards ?? this.mapOfPlayersAndCards,
     );
   }
 }
