@@ -41,15 +41,18 @@ class ChangeGameScreenEvent extends GameEvent {
 class CheckRoomEvent extends GameEvent {
   final Room room;
 
-  const CheckRoomEvent({
-    required this.room,
-  });
+  const CheckRoomEvent({required this.room});
 }
 
 class CheckWeaponEvent extends GameEvent {
   final Weapon weapon;
 
-  const CheckWeaponEvent({
-    required this.weapon,
-  });
+  const CheckWeaponEvent({required this.weapon});
+}
+
+class AssignPlayerCardEvent extends GameEvent {
+  final card;
+  final String playerName;
+
+  const AssignPlayerCardEvent({required this.card, required this.playerName});
 }
