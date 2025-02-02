@@ -1,13 +1,15 @@
 import 'package:cluedo_neu/application/gameBloc/game_bloc.dart';
+import 'package:cluedo_neu/business/models/player.dart';
 
 class PlayerValidation {
-  String? validatePlayerList({required List<String> playerNames}) {
-    for (int i = 0; i < playerNames.length - 1; i++) {
-      for (int j = i + 1; j < playerNames.length; j++) {
-        if (playerNames[i].trim() == "" || playerNames[j].trim() == "") {
+  String? validatePlayerList({required List<Player> players}) {
+    for (int i = 0; i < players.length - 1; i++) {
+      for (int j = i + 1; j < players.length; j++) {
+        if (players[i].playerName.trim() == "" ||
+            players[j].playerName.trim() == "") {
           return "Mindestens ein Spieler hat keinen Namen.";
-        } else if (playerNames[i].trim().toLowerCase() ==
-            playerNames[j].trim().toLowerCase()) {
+        } else if (players[i].playerName.trim().toLowerCase() ==
+            players[j].playerName.trim().toLowerCase()) {
           return "Spieler müssen unterschiedliche Namen haben.";
         }
       }

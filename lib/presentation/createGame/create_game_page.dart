@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cluedo_neu/business/models/player.dart';
 import 'package:cluedo_neu/core/failures/create_game_error_messages.dart';
 import 'package:cluedo_neu/core/validators/validate_player_input.dart';
 import 'package:cluedo_neu/presentation/createGame/widgets/create_game_body.dart';
@@ -43,18 +44,20 @@ class CreateGamePage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             GameBloc gameBloc = BlocProvider.of<GameBloc>(context);
-            List<String> playerNames = [];
+            List<Player> players = [];
             for (int i = 0; i < gameBloc.state.playerNumber; i++) {
-              playerNames.add(textEditingControllers[i].text);
+              players.add(Player(
+                  playerName: textEditingControllers[i].text,
+                  color: getPlayerColor(index: i)));
             }
 
             String? errorMessage =
-                PlayerValidation().validatePlayerList(playerNames: playerNames);
+                PlayerValidation().validatePlayerList(players: players);
             bool yourPlayerIsSelected = PlayerValidation().yourPlayerIsSelected(
                 gameState: BlocProvider.of<GameBloc>(context).state);
 
             if (errorMessage == null && yourPlayerIsSelected) {
-              gameBloc.add(LockPlayersEvent(playerNames: playerNames));
+              gameBloc.add(LockPlayersEvent(players: players));
               AutoRouter.of(context).replace(const GameRoute());
             } else {
               String newErrorMessage =
@@ -82,5 +85,24 @@ class CreateGamePage extends StatelessWidget {
             );
           },
         ));
+  }
+
+  Color getPlayerColor({required int index}) {
+    switch (index) {
+      case 0:
+        return Colors.blue;
+      case 1:
+        return Colors.amber;
+      case 2:
+        return Colors.red;
+      case 3:
+        return Colors.purple;
+      case 4:
+        return Colors.green;
+      case 5:
+        return Colors.pink;
+      default:
+        return Colors.black;
+    }
   }
 }
