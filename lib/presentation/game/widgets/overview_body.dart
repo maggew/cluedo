@@ -7,10 +7,19 @@ class OverviewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 100,
-      color: Colors.blue,
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 100,
+              color: Colors.amber,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
