@@ -1,5 +1,5 @@
-import 'package:cluedo_neu/domain/enums/guest_name.dart';
-import 'package:cluedo_neu/domain/models/guest.dart';
+import 'package:cluedo_neu/business/enums/guest_name.dart';
+import 'package:cluedo_neu/business/models/guest.dart';
 
 List<Guest> guests = [
   Guest(guestName: GuestName.gatow),

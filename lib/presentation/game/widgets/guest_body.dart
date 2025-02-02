@@ -1,8 +1,8 @@
 import 'package:cluedo_neu/application/gameBloc/game_bloc.dart';
-import 'package:cluedo_neu/utils/constants.dart';
+import 'package:cluedo_neu/business/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/models/guest.dart';
+import '../../../business/models/guest.dart';
 
 class GuestBody extends StatelessWidget {
   final GameState gameState;
@@ -23,7 +23,7 @@ List<Widget> getGuestRows({required GameState gameState}) {
   List<Widget> output = [];
   for (Guest guest in guests) {
     output.add(Card(
-      color: Colors.amber,
+      color: guest.guestName.color,
       child: Text(guest.guestName.value),
     ));
   }

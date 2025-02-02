@@ -1,6 +1,6 @@
 import 'package:cluedo_neu/application/gameBloc/game_bloc.dart';
 import 'package:cluedo_neu/core/widgets/custom_room_button.dart';
-import 'package:cluedo_neu/infrastructure/models/room.dart';
+import 'package:cluedo_neu/business/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
