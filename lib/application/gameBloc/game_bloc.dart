@@ -2,7 +2,6 @@ import 'package:cluedo_neu/domain/enums/room_name.dart';
 import 'package:cluedo_neu/domain/enums/weapon_name.dart';
 import 'package:cluedo_neu/infrastructure/models/room.dart';
 import 'package:cluedo_neu/infrastructure/models/weapon.dart';
-import 'package:cluedo_neu/utils/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
