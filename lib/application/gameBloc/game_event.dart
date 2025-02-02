@@ -15,9 +15,9 @@ class ChangePlayerNumberEvent extends GameEvent {
 }
 
 class LockPlayersEvent extends GameEvent {
-  final List<String> playerNames;
+  final List<Player> players;
 
-  const LockPlayersEvent({required this.playerNames});
+  const LockPlayersEvent({required this.players});
 }
 
 class UpdateErrorMessageEvent extends GameEvent {

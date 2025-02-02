@@ -1,4 +1,5 @@
 import 'package:cluedo_neu/application/gameBloc/game_bloc.dart';
+import 'package:cluedo_neu/business/models/player.dart';
 import 'package:cluedo_neu/core/widgets/custom_weapon_button.dart';
 import 'package:cluedo_neu/business/models/weapon.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +47,8 @@ List<Widget> weaponCheckboxWidgets(
             dropdownMenuEntries: getDropdownMenuEntries(gameState: gameState),
             initialSelection: "",
             onSelected: (playerName) {
-              BlocProvider.of<GameBloc>(context).add(
-                  AssignPlayerCardEvent(card: weapon.weaponName, playerName: playerName!));
+              BlocProvider.of<GameBloc>(context).add(AssignPlayerCardEvent(
+                  card: weapon.weaponName, playerName: playerName!));
             },
           ),
         ],
@@ -61,9 +62,11 @@ List<DropdownMenuEntry<String>> getDropdownMenuEntries(
     {required GameState gameState}) {
   List<DropdownMenuEntry<String>> dropdownMenuEntries = [];
   dropdownMenuEntries.add(DropdownMenuEntry<String>(value: "", label: ""));
-  for (String playerName in gameState.playerNames) {
-    dropdownMenuEntries
-        .add(DropdownMenuEntry<String>(value: playerName, label: playerName));
+  for (Player player in gameState.players) {
+    dropdownMenuEntries.add(DropdownMenuEntry<String>(
+      value: player.playerName,
+      label: player.playerName,
+    ));
   }
   return dropdownMenuEntries;
 }

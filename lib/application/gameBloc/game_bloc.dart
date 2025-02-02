@@ -1,5 +1,6 @@
 import 'package:cluedo_neu/business/enums/room_name.dart';
 import 'package:cluedo_neu/business/enums/weapon_name.dart';
+import 'package:cluedo_neu/business/models/player.dart';
 import 'package:cluedo_neu/business/models/room.dart';
 import 'package:cluedo_neu/business/models/weapon.dart';
 import 'package:equatable/equatable.dart';
@@ -18,13 +19,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
 
     on<LockPlayersEvent>((event, emit) {
-      Map<String, List<String>> mapOfPlayersAndCards = {};
-      for (String playerName in event.playerNames) {
-        mapOfPlayersAndCards[playerName] = [];
-      }
-      emit(state.copyWith(
-          playerNames: event.playerNames,
-          mapOfPlayersAndCards: mapOfPlayersAndCards));
+      emit(state.copyWith(players: event.players));
     });
 
     on<UpdateErrorMessageEvent>((event, emit) {
@@ -64,22 +59,21 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     //   emit(state.copyWith(weapons: updatedWeaponsList));
     // });
 
-    on<AssignPlayerCardEvent>((event, emit) {
+    /*on<AssignPlayerCardEvent>((event, emit) {
       Map<String, List<String>> mapOfPlayersAndCards =
           Map.of(state.mapOfPlayersAndCards!);
       String cardName = event.card.name;
-      if(event.playerName == ""){
-        for(String playerName in mapOfPlayersAndCards.keys){
-          if(mapOfPlayersAndCards[playerName]!.contains(cardName)){
+      if (event.playerName == "") {
+        for (String playerName in mapOfPlayersAndCards.keys) {
+          if (mapOfPlayersAndCards[playerName]!.contains(cardName)) {
             mapOfPlayersAndCards[playerName]!.remove(cardName);
           }
         }
-      }
-      else if (!mapOfPlayersAndCards[event.playerName]!.contains(cardName)) {
+      } else if (!mapOfPlayersAndCards[event.playerName]!.contains(cardName)) {
         mapOfPlayersAndCards[event.playerName]!.add(cardName);
       }
       emit(state.copyWith(mapOfPlayersAndCards: mapOfPlayersAndCards));
       print(mapOfPlayersAndCards);
-    });
+    });*/
   }
 }
