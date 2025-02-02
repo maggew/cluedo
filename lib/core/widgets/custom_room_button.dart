@@ -1,5 +1,5 @@
 import 'package:cluedo_neu/application/gameBloc/game_bloc.dart';
-import 'package:cluedo_neu/infrastructure/models/room.dart';
+import 'package:cluedo_neu/business/models/room.dart';
 import 'package:flutter/material.dart';
 
 class CustomRoomButton extends StatelessWidget {

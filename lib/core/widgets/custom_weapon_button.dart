@@ -1,4 +1,4 @@
-import 'package:cluedo_neu/infrastructure/models/weapon.dart';
+import 'package:cluedo_neu/business/models/weapon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
